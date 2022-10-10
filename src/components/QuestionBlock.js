@@ -9,12 +9,23 @@ const QuestionBlock = ( props ) => {
     setShowModal(true)
   }
 
+  const [messageQ, setMessageQ] = useState('')
+  const [messageA, setMessageA] = useState('')
+
+  const handleChangeQ = (newVal) => {
+    setMessageQ(newVal)
+  }
+  const handleChangeA = (newVal) => {
+    setMessageA(newVal)
+  }
+
   return (
     <div className = "question" style = {{cursor: 'pointer'}}>
       <div onClick = {() => showEntryModal()}>
         <h3> {props.score} </h3>
       </div>
-      {showModal && <QuestionEntryModal showModal = {showModal} setShowModal = {setShowModal} score = {props.score}/>}
+      {showModal ? <QuestionEntryModal showModal = {showModal} setShowModal = {setShowModal}
+       score = {props.score} messageQ = {messageQ} messageA = {messageA} handleChangeA = {handleChangeA} handleChangeQ = {handleChangeQ}/> :<></>}
     </div>
   )
 }

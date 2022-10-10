@@ -7,20 +7,8 @@ import {useState, useEffect} from 'react'
 
 const QuestionEntryModal = (props) => {
 
-  const [messageQ, setMessageQ] = useState('dsadasds')
-  const [messageA, setMessageA] = useState('')
-
   const hideEntryModal = () => {
     props.setShowModal(false)
-  }
-
-  function handleChangeQ(e) {
-    setMessageQ(e.target.value)
-    console.log('hi')
-  }
-  function handleChangeA(e) {
-    setMessageA(e.target.value)
-    console.log(e.target.value)
   }
 
   return (
@@ -31,23 +19,15 @@ const QuestionEntryModal = (props) => {
         </div>
 
         <div className = "textEntry">
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
-          autoComplete="off"
-        >
-
+        
           <span className = "entry">
             <TextField multiline className = "questionEntryBox" minRows={5} placeholder = "Enter your question here"
-            value = {messageQ} onChange={e => setMessageQ(e.target.value)}  />
+            value = {props.messageQ} onChange={e => props.handleChangeQ(e.target.value)}  />
            </span>
           <span>
             <TextField multiline className = "answerEntryBox" minRows={5} placeholder = "Enter your answer here" 
-             onChange={handleChangeA} value = {messageA} /> 
+              value = {props.messageA} onChange={e => props.handleChangeA(e.target.value)} /> 
           </span>
-        </Box>
         </div>
 
         <div className = "entryModalClose" onClick = {() => hideEntryModal()}>
