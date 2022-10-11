@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import QuestionBlock from './QuestionBlock'
+import { TextField } from '@mui/material'
 
 const QuestionColumn = ( props ) => {
 
@@ -10,11 +11,16 @@ const QuestionColumn = ( props ) => {
         s += 100
     }
 
-    const [questionCount, setQuestionCount] = useState()
+    // const [questionCount, setQuestionCount] = useState()
     const [categoryTitle, setCategoryTitle] = useState('')
+
+    const handleCatTitle = (newVal) => {
+        setCategoryTitle(newVal)
+    }
 
   return (
     <div>
+        <h2>{categoryTitle}</h2>
       {qCol}
     </div>
   )
