@@ -9,19 +9,17 @@ const Grid = (props) => {
 
 
   let s = 100
-  // for (let j = 0; j < 5; j++ ){
-  //   for (let i = 0; i < 5; i++) {
-  //     row.push(<QuestionBlock score = {s} showModal ={showModal} setShowModal = {setShowModal}/>)
-  //   }
-  //   board.push(row)
-  //   row = []
-  //   s += 100
-  // }
-
+  
   const [row, setRow] = useState(5)
   const [col, setCol] = useState(5)
 
-  const [boardCols, setBoardCols] = useState(...[<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier} key = {0} />])
+  const startTable = []
+  for(let i = 0; i < 5; i++){
+    startTable.push([<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier} key = {i} />])
+  }
+
+  const [boardCols, setBoardCols] = useState(startTable)
+  console.log(boardCols)
 
   const rowChange = (dir) => {
     if (dir === true){
@@ -46,7 +44,6 @@ const Grid = (props) => {
 
   return (
     <div className = "container question-board">
-        {/* {showModal ? <QuestionEntryModal />: <></>} */}
         {/* <QuestionBlock score = {s} />
         <QuestionBlock score = {s + 100} /> */}
         {boardCols}
