@@ -2,11 +2,12 @@ import QuestionBlock from './QuestionBlock'
 import {useState} from 'react'
 import QuestionEntryModal from './QuestionEntryModal'
 import QuestionColumn from './QuestionColumn'
+import { TextField } from '@mui/material'
+import './component_styles/grid.css'
 
 
 const Grid = (props) => {
   const multiplier = 1
-
 
   let s = 100
   
@@ -15,42 +16,64 @@ const Grid = (props) => {
 
   const startTable = []
   for(let i = 0; i < 5; i++){
-    startTable.push([<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier} key = {i} />])
+    startTable.push(<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier} key = {i} />)
   }
-
   const [boardCols, setBoardCols] = useState(startTable)
-  console.log(boardCols)
 
-  const rowChange = (dir) => {
-    if (dir === true){
-      setRow(row + 1)
-    }
-    else {
-      setRow(row - 1)
+  const rowChange = (newVal) => {
+    if (newVal >= 1 && newVal <= 10){
+      const ret = []
+      for (let i = 0; i < col; i++){
+        ret.push(<QuestionColumn rows = {newVal} setRow = {setRow} multiplier = {multiplier} key = {i} />)
+      }
+      setBoardCols(ret)
+      setRow(newVal)
     }
   }
 
 
-  const colChange = (dir) => {
-    if (dir === true){
-      setBoardCols( [...boardCols, <QuestionColumn row = {row} setRow = {setRow} multiplier = {multiplier} key = {col}/>] )
-      setCol(col + 1)
-    }
-    else {
-      setCol(col - 1)
+  const colChange = (newVal) => {
+    if (newVal >= 1 && newVal <= 10){
+      const ret = []
+      for (let i = 0; i < newVal; i++){
+        ret.push(<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier} key = {i}/>)
+      }
+      setBoardCols(ret)
+      // console.log(boardCols)
+      setCol(newVal)
     }
   }
   
 
   return (
-    <div className = "container question-board">
-        {/* <QuestionBlock score = {s} />
-        <QuestionBlock score = {s + 100} /> */}
-        {boardCols}
-        
+    <div>
+      <div className = "container question-board">
+          {/* <QuestionBlock score = {s} />
+          <QuestionBlock score = {s + 100} /> */}
+          {boardCols}
+      </div>
 
+      <div id = "colRowChanger">
+          <TextField
+            label = "rows"
+            type = "number"
+            InputLabelProps={
+              {shrink:true,}
+            }
+            value = {row}
+            onChange={e => rowChange(e.target.value)}
+          />
 
-        
+          <TextField
+            label = "columns"
+            type = "number"
+            InputLabelProps={
+              {shrink:true,}
+            }
+            value = {col}
+            onChange={e => colChange(e.target.value)}
+          />
+      </div>
     </div>
   )
 }

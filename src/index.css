@@ -20,7 +20,7 @@ body {
   margin: auto;
   color: white;
   display: grid;
-  grid-template-columns: 20rem 20rem 20rem 20rem 20rem;
+  grid-template-columns: 20rem 20rem 20rem 20rem 20rem 20rem 20rem;
 }
 
 .question {
@@ -33,3 +33,4 @@ body {
   background-color: #4c59e0;
   border-color: yellow;
 }
+
