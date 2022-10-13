@@ -14,6 +14,8 @@ const Grid = (props) => {
   const [row, setRow] = useState(5)
   const [col, setCol] = useState(5)
 
+  const [questions, setQuestions] = useState([])
+
   const startTable = []
   for(let i = 0; i < 5; i++){
     startTable.push(<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier} key = {i} />)
@@ -39,7 +41,6 @@ const Grid = (props) => {
         ret.push(<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier} key = {i}/>)
       }
       setBoardCols(ret)
-      // console.log(boardCols)
       setCol(newVal)
     }
   }
@@ -48,8 +49,6 @@ const Grid = (props) => {
   return (
     <div>
       <div className = "container question-board">
-          {/* <QuestionBlock score = {s} />
-          <QuestionBlock score = {s + 100} /> */}
           {boardCols}
       </div>
 

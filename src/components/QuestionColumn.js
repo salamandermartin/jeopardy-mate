@@ -6,21 +6,35 @@ const QuestionColumn = ( props ) => {
 
     let qCol = []
     let s = 100
-    for (let i = 0; i < props.rows; i++){
-        qCol.push( <QuestionBlock score = {s * props.multiplier} key = {i}/>)
-        s += 100
+    const iniQCol = new Array(props.rows)
+    const [qColValues, setqColValues] = useState(iniQCol)
+    const [categoryTitle, setCategoryTitle] = useState('')
+
+    const handleQColValues = (index, newQM, newAM) => {
+        let ret = qColValues
+        ret[index] = {"question": newQM, "answer": newAM}
+        setqColValues(ret)
+        console.log(qColValues)
     }
 
-    // const [questionCount, setQuestionCount] = useState()
-    const [categoryTitle, setCategoryTitle] = useState('')
+
+    for (let i = 0; i < props.rows; i++){
+        qCol.push( <QuestionBlock score = {s * props.multiplier} qColValues = {qColValues} setqColValues = {setqColValues} handleQColValues = {handleQColValues}  key = {i} in = {i}/>)
+        s += 100
+    }
 
     const handleCatTitle = (newVal) => {
         setCategoryTitle(newVal)
     }
 
+
+
   return (
     <div>
-        <h2>{categoryTitle}</h2>
+        <TextField
+            onChange={e => handleCatTitle(e.target.value)}
+        />
+
       {qCol}
     </div>
   )

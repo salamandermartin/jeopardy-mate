@@ -14,9 +14,11 @@ const QuestionBlock = ( props ) => {
 
   const handleChangeQ = (newVal) => {
     setMessageQ(newVal)
+    props.handleQColValues(props.in, messageQ, messageA)
   }
   const handleChangeA = (newVal) => {
     setMessageA(newVal)
+    props.handleQColValues(props.in, messageQ, messageA)
   }
 
   return (
