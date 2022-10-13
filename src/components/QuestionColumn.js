@@ -14,7 +14,7 @@ const QuestionColumn = ( props ) => {
         let ret = qColValues
         ret[index] = {"question": newQM, "answer": newAM}
         setqColValues(ret)
-        console.log(qColValues)
+        props.saveQA(props.inM, qColValues)
     }
 
 

@@ -14,36 +14,48 @@ const Grid = (props) => {
   const [row, setRow] = useState(5)
   const [col, setCol] = useState(5)
 
-  const [questions, setQuestions] = useState([])
+  const initQMatrix = new Array(col)
+
+  const [questionMatrix, setQuestionMatrix] = useState(initQMatrix)
+
+  const saveQA = (index, qList) => {
+    let ret = questionMatrix
+    ret[index] = qList
+    setQuestionMatrix(ret)
+    console.log(questionMatrix)
+  }
 
   const startTable = []
   for(let i = 0; i < 5; i++){
-    startTable.push(<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier} key = {i} />)
+    startTable.push(<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier}
+        questionMatrix = {questionMatrix} setQuestionMatrix = {setQuestionMatrix} inM = {i} key = {i} saveQA = {saveQA}/>)
   }
   const [boardCols, setBoardCols] = useState(startTable)
+
+  
 
   const rowChange = (newVal) => {
     if (newVal >= 1 && newVal <= 10){
       const ret = []
       for (let i = 0; i < col; i++){
-        ret.push(<QuestionColumn rows = {newVal} setRow = {setRow} multiplier = {multiplier} key = {i} />)
+        ret.push(<QuestionColumn rows = {newVal} setRow = {setRow} multiplier = {multiplier} key = {i} saveQA = {saveQA}/>)
       }
       setBoardCols(ret)
       setRow(newVal)
     }
   }
 
-
   const colChange = (newVal) => {
     if (newVal >= 1 && newVal <= 10){
       const ret = []
       for (let i = 0; i < newVal; i++){
-        ret.push(<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier} key = {i}/>)
+        ret.push(<QuestionColumn rows = {row} setRow = {setRow} multiplier = {multiplier} key = {i} saveQA = {saveQA}/>)
       }
       setBoardCols(ret)
       setCol(newVal)
     }
   }
+
   
 
   return (
