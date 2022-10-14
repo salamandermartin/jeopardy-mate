@@ -1,6 +1,5 @@
 import QuestionBlock from './QuestionBlock'
 import {useState} from 'react'
-import QuestionEntryModal from './QuestionEntryModal'
 import QuestionColumn from './QuestionColumn'
 import { TextField } from '@mui/material'
 import './component_styles/grid.css'
@@ -8,8 +7,8 @@ import './component_styles/grid.css'
 
 const Grid = (props) => {
   const multiplier = 1
-
   let s = 100
+  const fs = require('fs')
   
   const [row, setRow] = useState(5)
   const [col, setCol] = useState(5)
@@ -18,11 +17,15 @@ const Grid = (props) => {
 
   const [questionMatrix, setQuestionMatrix] = useState(initQMatrix)
 
-  const saveQA = (index, qList) => {
+  const saveQA = (index, qList, cTitle) => {
     let ret = questionMatrix
-    ret[index] = qList
+    ret[index] = {"category": cTitle, "QAvals":qList}
     setQuestionMatrix(ret)
     console.log(questionMatrix)
+  }
+  
+  const finishQA = (matrix) => {
+    return JSON.stringify({"board": matrix})
   }
 
   const startTable = []
