@@ -5,6 +5,8 @@ import {useState} from 'react'
 
 function App() {
   const [questionEntry, setQuestionEntry] = useState(false)
+  const [title, setTitle] = useState('Jeopardy')
+
 
   const [teamScore, setTeamScore] = useState([
     {
@@ -26,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header title = {title} setTitle = {setTitle}/>
 
       <Grid />
     </div>
