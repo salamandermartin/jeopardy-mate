@@ -11,7 +11,7 @@ const EditableTitle = (props) => {
                 </div>
             ) : (
                 <div onClick = {() => setEditing(true)}>
-                    {props.text || props.placeholder || "Editable Title"}
+                    <h1>{props.text || props.placeholder || "Editable Title"}</h1>
                 </div>
             ) 
             }
